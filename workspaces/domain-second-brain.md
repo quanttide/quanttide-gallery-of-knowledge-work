@@ -73,5 +73,5 @@
 - 战略管理（quanttide-strategy）
 - 客户支持（quanttide-support）
 - 认知工程（quanttide-think）
-- 知识工作（quanttide-work）
+- 知识工作（quanttide-work）——本文件所在领域
 - 叙事工程（quanttide-write）
