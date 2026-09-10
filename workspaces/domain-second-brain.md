@@ -14,7 +14,7 @@
 │   ├── roadmap/ insight/ intention/   未来：路线图、洞察、意图
 │   └── context/ archive/              默认入口与备份出口
 ├── docs/                       程序型的文档类
-│   ├── bylaw/ specification/          宪法：章程、标准
+│   ├── bylaw/ specification/          宪法：章程、规格
 │   ├── handbook/ gallery/             法律：手册、案例
 │   └── tutorial/ essay/               法理：教程、札记
 ├── apps/{app}/                 Platform：可部署应用
