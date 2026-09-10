@@ -43,13 +43,13 @@
 - 量潮商务拓展（quanttide-business）
 - 量潮软件工程（quanttide-code）
 - 量潮沟通管理（quanttide-connect）
-- 量潮课程（quanttide-course）
+- 量潮课程研发（quanttide-course）
 - 量潮众包管理（quanttide-crowd）
 - 量潮客户关系（quanttide-customer）
 - 量潮数据工程（quanttide-data）
 - 量潮议事管理（quanttide-delib）
 - 量潮交互设计（quanttide-design）
-- 量潮DevOps（quanttide-devops）
+- 量潮DevOps工程（quanttide-devops）
 - 量潮文档工程（quanttide-docs）
 - 量潮经济建模（quanttide-econ）
 - 量潮创业管理（quanttide-entrep）
