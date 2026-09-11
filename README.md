@@ -1,10 +1,4 @@
-# quanttide-gallery-of-knowledge-work
-
-量潮知识工作画廊——知识工作领域图集与展示。
-
-## 概述
-
-待补充
+# 量潮知识工作案例
 
 ## 许可
 
