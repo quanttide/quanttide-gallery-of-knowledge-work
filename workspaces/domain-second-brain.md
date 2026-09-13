@@ -67,6 +67,7 @@
 - 量潮支付工程（quanttide-pay）
 - 量潮产品研发（quanttide-product）
 - 量潮项目管理（quanttide-project）
+- 量潮公共关系（quanttide-relation）
 - 量潮销售管理（quanttide-sales）
 - 量潮机密管理（quanttide-secret）
 - 量潮安全工程（quanttide-security）
