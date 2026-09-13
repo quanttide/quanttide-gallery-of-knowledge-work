@@ -33,12 +33,12 @@ steps:
   - executor: human
     description: 文档定稿（内容取舍只能人拍）
 - name: test
-  description: 照用例设计测试，写在 apps/qtcloud-work/src/cli/tests/usecases.rs，每条测试上面一行注释写出处（形如「// 用例：一」）；写 apps/qtcloud-work/src/cli/scripts/validate-usecases.sh 做双向对账（文档里的用例号与测试里的出处，两边集合必须相等）；对账结果与一次红的记录写进本任务报告的「对账」一节
+  description: 照用例设计测试，写在 apps/qtcloud-work/src/cli/tests/，每条测试上面一行注释写出处（形如「// 用例：一」）；写 apps/qtcloud-work/src/cli/scripts/validate-usecases.sh 做双向对账（文档里的用例号与测试里的出处，两边集合必须相等）；对账结果与一次红的记录写进本任务报告的「对账」一节
   executor: agent
   criteria:
   - executor: rule
     description: 测试在
-    path: apps/qtcloud-work/src/cli/tests/usecases.rs
+    path: apps/qtcloud-work/src/cli/tests
   - executor: rule
     description: 对账脚本在
     path: apps/qtcloud-work/src/cli/scripts/validate-usecases.sh

@@ -38,6 +38,10 @@ steps:
     file: '{{report}}'
     contains: '## 旁枝'
   - executor: rule
+    description: 「拿不准」一节在
+    file: '{{report}}'
+    contains: '## 拿不准'
+  - executor: rule
     description: 排在最前的三节顺序对（第一眼 → 看到 → 主诊断）
     run: 'test "$(grep -n "^## 第一眼" {{report}} | cut -d: -f1)" -lt "$(grep -n "^## 看到" {{report}} | cut -d: -f1)" && test "$(grep -n "^## 看到" {{report}} | cut -d: -f1)" -lt "$(grep -n "^## 主诊断" {{report}} | cut -d: -f1)"'
   - executor: agent

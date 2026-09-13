@@ -28,15 +28,15 @@
 
 ### publish-rust 发布 Rust 包
 
-toolkit 的约定是**一个语言包一条发布线**——Rust 与 Dart 各自定版本、各自发，互不牵连（标签形如 `rust/vX.Y.Z-alpha.N`）；把包内 `[Unreleased]` 落成 `## [X.Y.Z-alpha.N]`、清单版本与 `Cargo.lock` 同步（锁文件与版本同一提交，否则发布的 `--locked` 会红）；预检与门禁全过，请创始人放行；`qtcloud-devops release publish -v rust/vX.Y.Z-alpha.N` 建 tag 推远端，`release-rust.yml` 随之发到 crates.io。版本号、tag、发布结果抄进报告的「发布」一节。没有这一步，下一步的替换只能挂本地路径，那不算抽出去。
+toolkit 的约定是**两侧同号**——Rust 与 Dart 发同一个版本号，向量一致才发（标签形如 `rust/vX.Y.Z`；档位走 `alpha`（能跑，会用的人先试）→ `beta` → `rc` → 正式版）；把包内 `[Unreleased]` 落成 `## [X.Y.Z]`、清单版本与 `Cargo.lock` 同步（锁文件与版本同一提交，否则发布的 `--locked` 会红）；预检与门禁全过，请创始人放行；`qtcloud-devops release publish -v rust/vX.Y.Z` 建 tag 推远端，`release-rust.yml` 随之发到 crates.io。版本号、tag、发布结果抄进报告的「发布」一节。没有这一步，下一步的替换只能挂本地路径，那不算抽出去。
 
-验收：程序查版本号是这一轮的 `-alpha.N`、清单版本与 CHANGELOG 对得上、`release-rust.yml` 最近一次跑绿、`rust/v*` tag 已在远端、报告里有「## 发布」；智能体审版本是这一轮新落的（不是拿旧版本充数）、包在 crates.io 上查得到；人拍创始人放行（定了版本号就不再改）。
+验收：程序查版本号是这一轮的档位号、与 Dart 侧同号、清单版本与 CHANGELOG 对得上、`release-rust.yml` 最近一次跑绿、`rust/v*` tag 已在远端、报告里有「## 发布」；智能体审版本是这一轮新落的（不是拿旧版本充数）、包在 crates.io 上查得到；人拍创始人放行（定了版本号就不再改）。
 
 ### publish-dart 发布 Dart 包
 
-与 Rust 那条**各发各的**——Dart 的版本号跟自己的改动走，不必与 Rust 对齐（标签形如 `dart/vX.Y.Z-alpha.N`）；同样把 `[Unreleased]` 落成 `## [X.Y.Z-alpha.N]`、清单版本同步；预检与门禁全过，请创始人放行；`qtcloud-devops release publish -v dart/vX.Y.Z-alpha.N` 建 tag，`release-dart.yml` 随之发到 pub.dev（凭证是 `PUBDEV_CREDENTIAL_JSON`，落成 pub 缓存的 `credentials.json`）。
+与 Rust 那条**同号**——Dart 发与 Rust 相同的版本号（标签形如 `dart/vX.Y.Z`）；同样把 `[Unreleased]` 落成 `## [X.Y.Z]`、清单版本同步；预检与门禁全过，请创始人放行；`qtcloud-devops release publish -v dart/vX.Y.Z` 建 tag，`release-dart.yml` 随之发到 pub.dev（凭证是 `PUBDEV_CREDENTIAL_JSON`，落成 pub 缓存的 `credentials.json`）。
 
-验收：程序查版本号是这一轮的 `-alpha.N`、清单版本与 CHANGELOG 对得上、`release-dart.yml` 最近一次跑绿、`dart/v*` tag 已在远端、报告里有「## 发布」；智能体审版本是这一轮新落的、包在 pub.dev 上查得到；人拍创始人放行。
+验收：程序查版本号是这一轮的档位号、与 Rust 侧同号、清单版本与 CHANGELOG 对得上、`release-dart.yml` 最近一次跑绿、`dart/v*` tag 已在远端、报告里有「## 发布」；智能体审版本是这一轮新落的、包在 pub.dev 上查得到；人拍创始人放行。
 
 ### adopt 替换到位
 

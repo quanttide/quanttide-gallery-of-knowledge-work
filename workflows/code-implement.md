@@ -24,7 +24,7 @@
 
 ### test 照用例设计测试
 
-一条用例一组测试，测试写在 `apps/qtcloud-work/src/cli/tests/usecases.rs`，每条测试上面一行注释写出处（形如 `// 用例：一`）；写 `apps/qtcloud-work/src/cli/scripts/validate-usecases.sh` 做双向对账——文档里的用例号与测试里的出处，两边集合必须相等。对账结果与一次红的记录写进报告的「对账」一节。
+一条用例一组测试，测试写在 `apps/qtcloud-work/src/cli/tests/` 下，每条测试上面一行注释写出处（形如 `// 用例：一`）；写 `apps/qtcloud-work/src/cli/scripts/validate-usecases.sh` 做双向对账——文档里的用例号与测试里的出处，两边集合必须相等。对账结果与一次红的记录写进报告的「对账」一节。
 
 验收：程序查测试文件与对账脚本都在、对账跑得过（两边名字相等）、实现缺席时测试是红的、报告里有「## 对账」；智能体审每条用例都有测试，没有恒绿的空壳。
 
@@ -40,7 +40,7 @@
 
 **文档**分三份，都在 `apps/qtcloud-work/src/cli/docs/` 下；用例写在 `user-guide/index.md` 里，每条一个小节，标题形如 `## 用例 一、起一件任务并走一步`。
 
-**测试**写在 `apps/qtcloud-work/src/cli/tests/usecases.rs`，每条测试函数上面一行注释写出处，形如 `// 用例：一`。
+**测试**写在 `apps/qtcloud-work/src/cli/tests/` 下，每条测试函数上面一行注释写出处，形如 `// 用例：一`。
 
 **对账**由 `apps/qtcloud-work/src/cli/scripts/validate-usecases.sh` 承担：抓文档里的用例号与测试里的出处，两边集合必须相等，不等就报错退出。
 
