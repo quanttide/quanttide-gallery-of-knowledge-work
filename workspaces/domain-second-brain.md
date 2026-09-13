@@ -4,7 +4,7 @@
 
 ### 目标
 
-领域第二大脑是领域内的一个工作区：以[产物类别](../../specification/piece/category.md)为骨架存放领域知识，使各领域结构一致、可互相引用（跨领域框架见[章程](../../../../../assets/quanttide-bylaw/domains/meta/memory/second-brain.md)）。
+领域第二大脑是领域内的一个工作区：以[产物类别](../../specification/piece/artifact.md)为骨架存放领域知识，使各领域结构一致、可互相引用（跨领域框架见[章程](../../../../../assets/quanttide-bylaw/domains/meta/memory/second-brain.md)）。
 
 ### 一般格式
 
@@ -24,7 +24,7 @@
 └── examples/default/           Example：实验室
 ```
 
-目录名与[产物类别](../../specification/piece/category.md)一一对应，各资产独立成仓、父仓库只追踪引用。Context 是默认入口，Archive 是过时资产的出口；产出按流动规则转出到目标领域的对应资产，不在上游留副本。新建领域第二大脑时登记到本文件目录。
+目录名与[产物类别](../../specification/piece/artifact.md)一一对应，各资产独立成仓、父仓库只追踪引用。Context 是默认入口，Archive 是过时资产的出口；产出按流动规则转出到目标领域的对应资产，不在上游留副本。新建领域第二大脑时登记到本文件目录。
 
 ### 验收
 
