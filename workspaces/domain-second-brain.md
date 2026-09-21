@@ -36,7 +36,6 @@
 
 ## 目录
 
-- 量潮学术研究（quanttide-academics）
 - 量潮智能体工程（quanttide-agent）
 - 量潮数字资产管理（quanttide-asset）
 - 量潮身份认证（quanttide-auth）
@@ -68,6 +67,7 @@
 - 量潮产品研发（quanttide-product）
 - 量潮项目管理（quanttide-project）
 - 量潮公共关系（quanttide-relation）
+- 量潮学术研究（quanttide-research）
 - 量潮销售管理（quanttide-sales）
 - 量潮机密管理（quanttide-secret）
 - 量潮安全工程（quanttide-security）
