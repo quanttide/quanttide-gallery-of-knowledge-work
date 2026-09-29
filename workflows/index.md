@@ -17,3 +17,5 @@
 - [设计评审](design-review.md)：一张界面截图 → 评审报告。
 - [DevOps 发布](devops-release.md)：一轮变更 → 一次预发布（tag 与 Release）。
 - [学习任务创建](learn-task-create.md)：一份学习任务书 → 课堂站点上的新版。
+- [语境到档案](context-to-profile.md)：语境条目 → 档案材料。
+- [资源落后检测](stale-audit.md)：一轮实现变更 → 落后资源的清单与修订。
