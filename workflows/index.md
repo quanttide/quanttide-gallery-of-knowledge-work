@@ -19,3 +19,4 @@
 - [学习任务创建](learn-task-create.md)：一份学习任务书 → 课堂站点上的新版。
 - [语境到档案](context-to-profile.md)：语境条目 → 档案材料。
 - [资源落后检测](stale-audit.md)：一轮实现变更 → 落后资源的清单与修订。
+- [招聘流程](recruitment-flow.md)：投递邮件 → 候选人清单、评估报告与推荐台账。

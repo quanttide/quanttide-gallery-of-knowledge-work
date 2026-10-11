@@ -1,0 +1,126 @@
+name: recruitment-flow
+description: 飞书上的招聘流程走一轮——投递邮件进来、发问卷、候选人进群、建清单、出评估、必要时推荐给企业。工作区根是招聘数据仓（qtrecurit-private），判据里的路径从那个仓的根算；产物是候选人清单、评估报告与推荐台账，都落在那个仓。跑法：qtcloud-work task --new recruitment-flow --workflow recruitment-flow，再 --next 一条一条走
+steps:
+- name: fetch
+  description: 拉邮件。输入：hr@quanttide.com 的收件箱。过程：分页拉元数据（每页 400 封），按月份过滤，按游标只拉新 message_id 的正文，附件下载到 attachments/。输出：assets/YYYY-MM/ 下的 INBOX.json、INBOX.full.json、attachments/ 与 .cursor。验收：见判据
+  executor: agent
+  criteria:
+  - executor: rule
+    description: 拉取脚本跑得通
+    run: python3 scripts/fetch_mail.py
+  - executor: rule
+    description: 当月元数据与正文都落了盘
+    file: assets/2026-08/INBOX.full.json
+  - executor: rule
+    description: 游标写下了（下次只拉新邮件）
+    file: assets/2026-08/.cursor
+  - executor: agent
+    description: 这份数据是按月、按文件夹分开存的；拉取范围不只是收件箱
+
+- name: fetch-drifted
+  description: 补拉漂移文件夹。输入：上面的收件箱数据。过程：HR 处理邮件时会把投递移进「已发送问卷」「沟通面试中」等文件夹，这些不会出现在收件箱；逐个文件夹补拉一次。输出：同一个月目录下的补充数据。验收：见判据
+  executor: agent
+  criteria:
+  - executor: rule
+    description: 已发送问卷文件夹拉过
+    run: python3 scripts/fetch_mail.py --folder 已发送问卷
+  - executor: rule
+    description: 沟通面试中文件夹拉过
+    run: python3 scripts/fetch_mail.py --folder 沟通面试中
+  - executor: agent
+    description: 逐个比对文件夹与收件箱，确认漂移的投递都补回来了，没有重复计数
+
+- name: spam
+  description: 捞回被误判的投递。输入：Spam 文件夹。过程：有效投递会被判成垃圾邮件，且 Spam 里的附件下载受限（attachment from spam mail is restricted）——先把邮件移回收件箱，再重新下载附件。输出：补回正文与附件的投递。验收：见判据
+  executor: human
+  criteria:
+  - executor: human
+    description: 在飞书里把 Spam 中的有效投递移回收件箱
+  - executor: rule
+    description: 移回后再拉一次，附件到位
+    run: python3 scripts/fetch_mail.py --force
+  - executor: agent
+    description: 判过一遍 Spam 里的每一封，说清哪些移回、哪些不回
+
+- name: journal
+  description: 生成候选人时间线。输入：assets/YYYY-MM/ 下的邮件。过程：按邮箱聚合（收件箱按发件人、已发送按收件人），每位候选人一条时间线。输出：data/journal/YYYY-MM/ 下的 _index.json 与每位候选人一个文件。验收：见判据
+  executor: agent
+  criteria:
+  - executor: rule
+    description: 时间线生成跑得通
+    run: python3 scripts/build_journal.py 2026-08
+  - executor: rule
+    description: 候选人索引在
+    file: data/journal/2026-08/_index.json
+  - executor: agent
+    description: 抽几位候选人，时间线里的邮件归属正确（同一人不同邮箱变体没被拆成两个人）
+
+- name: survey
+  description: 拉问卷记录。输入：飞书知识库「量潮招聘第二大脑」→「量潮招聘工作档案」→「调研」表。过程：拉表记录，转成每行一条的 JSONL。输出：data/profile/YYYY-MM/survey_results.jsonl。验收：见判据
+  executor: agent
+  criteria:
+  - executor: rule
+    description: 问卷记录拉下来了
+    run: lark-cli base +record-list --base-token <base_token> --table-id <table_id> --format json > /tmp/records.json
+  - executor: rule
+    description: 转成了 JSONL
+    run: python3 scripts/format_survey.py /tmp/records.json > data/profile/2026-08/survey_results.jsonl
+  - executor: agent
+    description: 拉下来的条数与表里大致对得上；对照上个月，说清有多少人交了、多少人没交
+
+- name: list
+  description: 建候选人清单。输入：INBOX.full.json 与问卷结果。过程：按发件人聚合出 candidates.csv（序号/姓名/邮箱/岗位/状态/邮件数/首次与最后联系），按附件生成 documents.csv（简历/求职信/作品集）；姓名、岗位要对着邮件主题人工核对，附件类型要打开看内容判定。输出：data/profile/YYYY-MM/ 下两个 CSV。验收：见判据
+  executor: agent
+  criteria:
+  - executor: rule
+    description: 候选人清单在
+    file: data/profile/2026-08/candidates.csv
+  - executor: rule
+    description: 附件清单在
+    file: data/profile/2026-08/documents.csv
+  - executor: human
+    description: 核对姓名与岗位（机器从主题里提的常有错）
+  - executor: human
+    description: 判定附件类型（简历/求职信/作品集，机器按文件名分的不准）
+
+- name: evaluate
+  description: 出评估报告。输入：候选人清单与问卷结果。过程：先看能力（门槛），再看对公司的了解程度与认可度（决定排序与留存预期）；问卷以「对公司了解」为核心逐份评级，并与邮件评估交叉验证（岗位漂移、诚意）。输出：data/report/YYYY-MM-candidates-ranking.md 与 YYYY-MM-survey.md。验收：见判据
+  executor: human
+  criteria:
+  - executor: rule
+    description: 简历评估报告在
+    file: data/report/2026-08-candidates-ranking.md
+  - executor: rule
+    description: 问卷分析报告在
+    file: data/report/2026-08-survey.md
+  - executor: human
+    description: 评级按「了解度与留存优先」下结论：能力是门槛，了解度定排序
+
+- name: refer
+  description: 人才推荐。输入：评估报告与数据台账。过程：按准入底线（责任心 ≥ 中 + 材料真实 + 候选人同意）从报告取数筛出推荐池，维护企业需求单，匹配置信后生成唯一凭证（编号 + 候选人邮箱 + 企业邮箱 + 时间戳）发出，结果记台账。输出：data/referral/companies.md、referrals.csv 与 YYYY-MM-referrals.md。验收：见判据
+  executor: human
+  criteria:
+  - executor: rule
+    description: 推荐台账在
+    file: data/referral/referrals.csv
+  - executor: rule
+    description: 企业需求单在
+    file: data/referral/companies.md
+  - executor: human
+    description: 逐条确认准入底线过了（淘汰组绝不推荐）
+  - executor: human
+    description: 候选人知情同意后才发
+  - executor: agent
+    description: 凭证编号唯一（编号+候选人邮箱+企业邮箱+时间戳），企业收到的是已验证事实与品格结论，不含判分细节
+
+- name: review
+  description: 回灌与复核。输入：企业反馈（面试/入职/表现/翻车）与本期全部产物。过程：反馈记入台账并回灌评估模型；复核这轮流程本身——哪一步卡住了、卡在哪里，决定下一轮改哪一步。输出：更新后的台账与一份流程复核结论。验收：见判据
+  executor: human
+  criteria:
+  - executor: rule
+    description: 台账里有本轮反馈
+    file: data/referral/referrals.csv
+  - executor: human
+    description: 说清这轮卡点落在哪一步、下一轮改什么
+  - executor: agent
+    description: 复核结论与本期数据对得上（漏斗数、未交问卷的人数、人肉介入的环节）
