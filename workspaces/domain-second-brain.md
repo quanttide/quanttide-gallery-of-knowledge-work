@@ -4,7 +4,7 @@
 
 ### 目标
 
-领域第二大脑是领域内的一个工作区：以[产物类别](../../specification/piece/artifact.md)为骨架存放领域知识，使各领域结构一致、可互相引用（跨领域框架见[章程](../../../../../assets/quanttide-bylaw/domains/meta/memory/second-brain.md)）。
+领域第二大脑是领域内的一个工作区：以[产物类别](../../specification/piece/artifact.md)为骨架存放领域知识，使各领域结构一致、可互相引用（跨领域框架见[《量潮标准范畴》](../../../../../categories/quanttide-meta/docs/gallery/metaphysics/category/index.md)）。
 
 ### 一般格式
 
