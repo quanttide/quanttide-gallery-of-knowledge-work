@@ -10,6 +10,10 @@
 
 ## [Unreleased]
 
+### 变更
+
+- `workflows/` 改名 `pipelines/`：十二件案例统一按需求、意图、规格、实现四节重写；同名 `.yaml` 定位为规格的一种形式化表达，不再是另一份正本
+
 ### 移除
 
 - 产物案例十件迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/category)：类别归属改为资产类别，标题与首段改为资产口径；本仓 `artifacts/` 目录删除

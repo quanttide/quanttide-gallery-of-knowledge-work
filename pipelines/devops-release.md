@@ -1,12 +1,19 @@
 # DevOps 发布
 
-## 目标
+## 需求
 
 给 QtCloud Work CLI 走一次预发布——定预发布版本号、收 CHANGELOG、跑四道门禁、发布预检、`--dry-run` 预演、人点头、真发、核 tag 已推。工作区根是领域仓，判据里的路径从仓根算。
 
-产物是本任务的报告，缺省落草稿区；要进正式仓就在任务文件的 `artifacts.report` 里写 `data/report/iGuo/<名字>.md`。
+## 意图
 
-## 步骤与验收
+- **预演先于人**：真发之前先 `--dry-run` 看清会建哪个 tag、推去哪、发到哪个仓；预演产出任何东西都算失败。
+- **门禁从文档侧修**：红了先改文档与测试，再改行为，不反过来。
+- **版本三处一致**：CHANGELOG、Cargo.toml 与 tag 前缀同号，缺一不算过。
+- **发布后不重跑预检**：tag 已存在、工作区也会被后续改动扰动，预检的记录以发布前那一刻为准。
+
+## 规格
+
+形式化表达见同目录 `devops-release.yaml`。
 
 ### version 定版本
 
@@ -44,11 +51,9 @@
 
 验收：程序跑发布跑完、tag 已在远端，且报告里有「## 发布」一节；智能体审报告里写清了这次发布的 tag、Release 地址与它对应哪些变更。
 
-## 产物
+## 实现
 
-本任务的报告，含门禁、预检、预演、结论、发布各一节；远端是新建的 tag 与 Release。
-
-## 怎么跑
+本任务的报告，含门禁、预检、预演、结论、发布各一节；远端是新建的 tag 与 Release。报告缺省落草稿区；要进正式仓就在任务文件的 `artifacts.report` 里写 `data/report/iGuo/<名字>.md`。
 
 ```bash
 qtcloud-work task --new devops-release --workflow devops-release

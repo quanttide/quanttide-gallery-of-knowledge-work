@@ -1,14 +1,21 @@
 # 学习任务创建
 
-## 目标
+## 需求
 
 把一份学习任务书从个人档案送出去——先提交到 learn 的 profile（学习管理档案），再提交到 qtclass 仓的 site（量潮课堂站点内容），最后给 site 发一个新版本（推 `site/*` tag，触发 `deploy-site` 构建上传）。
 
 跨三个仓，工作区根是领域仓（`quanttide-work`）：learn 的档案与 qtclass 用相对路径 `../quanttide-learn/data/profile` 与 `../qtclass`；qtclass 需先在本地有工作副本（没克隆就先 `git clone https://github.com/quanttide/qtclass.git ../qtclass`）。发版走 `qtcloud-devops release audit` / `publish`。
 
-**版本号一处都不能落**：`src/site/package.json`、`src/site/CHANGELOG.md`、这条定义判据里写的 tag，三处同时改。
+## 意图
 
-## 步骤与验收
+- **档案是正本，站点是逐字副本**：任务书先落档案，站点那份照着放；两边内容逐字相同，站点不另改。
+- **文件名定了不改**：站点按文件名逐字对上，`tasks/try-qtcloud-work-cli.md` 起好就不再改。
+- **版本号一处都不能落**：`src/site/package.json`、`src/site/CHANGELOG.md`、这条定义判据里写的 tag，三处同时改。
+- **顺序即依赖**：档案 → 站点 → 发版，前一步不成就没有后一步。
+
+## 规格
+
+形式化表达见同目录 `learn-task-create.yaml`。
 
 ### profile 进学习档案
 
@@ -42,11 +49,9 @@
 
 验收：程序查报告里有「## 结论」；智能体审三行说得清送到了哪、还差什么，拿不准的单列、不混在结论里。
 
-## 产物
+## 实现
 
 本任务的报告，五节：档案 / 站点 / 预检 / 发布 / 结论；外加 learn 档案仓与 qtclass 仓各一次提交，以及一个新的 `site/*` tag。
-
-## 怎么跑
 
 ```bash
 qtcloud-work task --new learn-task-create --workflow learn-task-create
