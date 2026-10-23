@@ -10,6 +10,10 @@
 
 ## [Unreleased]
 
+### 移除
+
+- 产物案例十件迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/category)：类别归属改为资产类别，标题与首段改为资产口径；本仓 `artifacts/` 目录删除
+
 ### 新增
 
 - 流程案例新增「招聘流程」一件：投递邮件 → 候选人清单、评估报告与推荐台账，附同名可运行的 `.yaml`。材料取自 `qtrecurit-private/docs/handbook/workflow.md`（2026-08 按实际运行更新），未编造；每一步带输入、过程、输出与三层验收（程序查 / 智能体审 / 人拍）

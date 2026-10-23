@@ -11,9 +11,9 @@
 3. 沿轴排阶段：每个阶段只在转变轴上前进一格，不跳格；阶段之间解耦，可独立验收。
 4. 写达成标志：每个阶段的达成标志从意图措辞中长出来，写成可检验的陈述（“不再一个人”→多人独立执行结果一致）。
 5. 用洞察校验顺序：洞察作约束与可行性判断（如“共识先行”“结构不稳不能自动化”），写入顺序依据；洞察不得充当方向来源——执行者的能力递进是执行者的路线图，不是系统的。
-6. 提交验收：按[路线图](../artifacts/roadmap.md)的验收判据逐阶段核对，然后交用户验收。
+6. 提交验收：按[路线图类资产](https://github.com/quanttide/quanttide-gallery-of-asset-management/blob/main/category/roadmap.md)的验收判据逐阶段核对，然后交用户验收。
 
 ## 验收
 
-- 产出路线图满足[路线图](../artifacts/roadmap.md)的验收标准。
+- 产出路线图满足[路线图类资产](https://github.com/quanttide/quanttide-gallery-of-asset-management/blob/main/category/roadmap.md)的验收标准。
 - 推导过程中未出现“从已做状态外推”或“从执行者能力外推”的阶段。
