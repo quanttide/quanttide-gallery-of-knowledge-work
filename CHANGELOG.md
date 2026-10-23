@@ -16,6 +16,7 @@
 
 ### 移除
 
+- 领域第二大脑一件迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/catalog)：首段改为资产目录口径，两处链接改为资产类别与元工程；本仓 `workspaces/` 目录删除
 - 管道案例十二件迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/pipelines)：需求、意图、规格、实现四节与同名 YAML 原样随迁；本仓 `pipelines/` 目录删除
 - 产物案例十件迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/category)：类别归属改为资产类别，标题与首段改为资产口径；本仓 `artifacts/` 目录删除
 
