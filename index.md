@@ -4,6 +4,6 @@
 
 ## 目录
 
-- [管道案例](./pipelines/index.md)：十二条管道，每件写需求、意图、规格与实现；规格旁边同名放可运行的 `.yaml`。
+- [领域第二大脑](./workspaces/domain-second-brain.md)：一个领域仓的目录骨架与流动规则。
 
-产物类别已迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/category)。
+产物类别已迁入[量潮数字资产案例](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/category)；管道案例已迁入同一画廊的 [pipelines](https://github.com/quanttide/quanttide-gallery-of-asset-management/tree/main/pipelines)。
